@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="received_json_will_be_displayed_here">Received JSON will be displayed here</string>
+</resources>
