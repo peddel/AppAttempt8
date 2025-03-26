@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Add this EditText for IP input -->
+    <EditText
+        android:id="@+id/ipAddressInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter server IP (e.g., 192.168.1.100)"
+        android:inputType="number|text"
+        android:importantForAutofill="no" />
+
     <Button
         android:id="@+id/connectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Connect to Server" />
 
     <TextView

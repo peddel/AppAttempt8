@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private var socket: Socket? = null
     private var isConnected = false
     private val handler = Handler(Looper.getMainLooper())
-    private val serverIp = "172.4.166.122" // Change to your server's IP
+    private var serverIp = "" // Change to your server's IP
     private val serverPort = 8080
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.connectButton.setOnClickListener {
             if (!isConnected) {
+                // Get IP from input field when connecting
+                serverIp = binding.ipAddressInput.text.toString().trim()
+
+                if (serverIp.isEmpty()) {
+                    updateStatus("Please enter an IP address")
+                    return@setOnClickListener
+                }
+
+                if (!isValidIpAddress(serverIp)) {
+                    updateStatus("Invalid IP format")
+                    return@setOnClickListener
+                }
+
                 connectToServer()
             } else {
                 disconnectFromServer()
@@ -37,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Validate IP address format
+    private fun isValidIpAddress(ip: String): Boolean {
+        val pattern = "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+        return ip.matches(pattern.toRegex())
+    }
     private fun connectToServer() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -127,4 +145,3 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-// 172.4.166.122
